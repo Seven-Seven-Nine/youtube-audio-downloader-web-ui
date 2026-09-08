@@ -1,0 +1,44 @@
+@media (prefers-color-scheme: dark) {
+    :root {
+        --main-background-color: #211D1D;
+        --panel-background-color: #272121;
+        --text-and-icon-color: #E8D3D3;
+        --main-border-color: #433838;
+        --main-button-background-color: #2B1F1F;
+        --focus-color: #7C1220;
+        --focus-border-color: #FF1D3B;
+        --focus-shadow-color: #FF000040;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --main-background-color: #FFECD5;
+        --panel-background-color: #FFE5C8;
+        --text-and-icon-color: #1D1818;
+        --main-border-color: #FF6200;
+        --main-button-background-color: #EFD4B4;
+        --focus-color: #FF3853;
+        --focus-border-color: #FF0022;
+        --focus-shadow-color: #FF000040;
+    }
+}
+
+body {
+    background-color: var(--main-background-color);
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    color: var(--text-and-icon-color);
+}
+
+button {
+    background-color: var(--main-button-background-color);
+    border-color: var(--main-border-color);
+    transition: background-color 150ms, border-color 150ms;
+
+    &:hover {
+        background-color: var(--focus-color);
+        border-color: var(--focus-border-color);
+    }
+}
