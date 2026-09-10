@@ -5,12 +5,16 @@ import MultiLoadingIcon from "../assets/pixelarticons_text-wrap.svg?component";
 import SortIcon from "../assets/pixelarticons_sort-horizontal.svg?component";
 import SettingIcon from "../assets/pixelarticons_settings-2.svg?component";
 import LightThemeIcon from "../assets/pixelarticons_sun-solid.svg?component";
+import DarkThemeIcon from "../assets/dinkie-icons_crescent-moon-filled.svg?component";
 
 import { useRoute, type RouteLocationNormalizedGeneric } from "vue-router";
 import { computed, type ComputedRef } from "vue";
+import { useTheme } from "../composables/useTheme.ts";
 
 const route: RouteLocationNormalizedGeneric = useRoute();
 const currentPath: ComputedRef<string> = computed((): string => route.path);
+
+const { theme, nextTheme } = useTheme();
 </script>
 
 <template>
@@ -36,8 +40,9 @@ const currentPath: ComputedRef<string> = computed((): string => route.path);
             </RouterLink>
         </Tooltip>
         <Tooltip text="Переключить цветовую схему" position="left">
-            <div class="icon-box">
-                <LightThemeIcon class="icon" />
+            <div @click="nextTheme()" class="icon-box">
+                <LightThemeIcon v-if="theme === 'dark'" class="icon" />
+                <DarkThemeIcon v-if="theme === 'light'" class="icon" />
             </div>
         </Tooltip>
     </div>

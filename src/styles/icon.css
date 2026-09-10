@@ -2,6 +2,10 @@
     fill: var(--text-and-icon-color);
 }
 
+.icon-corner path {
+    stroke: var(--main-border-color);
+}
+
 .icon-box {
     cursor: pointer;
     background-color: var(--panel-background-color);
