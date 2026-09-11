@@ -20,6 +20,17 @@ import IconBottomRightCorner from "../assets/icon-bottom-right-corner.svg?compon
 </template>
 
 <style scoped>
+@keyframes appearance-block-content {
+    0% {
+        opacity: 0.1;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 .block-content {
     background-color: var(--panel-background-color);
     border-radius: 10px;
@@ -28,6 +39,8 @@ import IconBottomRightCorner from "../assets/icon-bottom-right-corner.svg?compon
     position: relative;
     min-width: 500px;
     min-height: 300px;
+    transition: background-color 100ms;
+    animation: appearance-block-content 200ms ease;
 }
 
 .block-border-icons {

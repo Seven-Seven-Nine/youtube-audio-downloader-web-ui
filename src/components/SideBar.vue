@@ -1,4 +1,4 @@
-<script lang="tsx" setup>
+<script lang="ts" setup>
 import Tooltip from "./Tooltip.vue";
 import LinkIcon from "../assets/pixelarticons_link.svg?component";
 import MultiLoadingIcon from "../assets/pixelarticons_text-wrap.svg?component";

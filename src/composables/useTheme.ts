@@ -1,11 +1,11 @@
-import { ref, type Ref, onMounted, onUnmounted } from "vue";
+import { ref, type Ref, onMounted } from "vue";
 
 type Theme = "light" | "dark" | "auto";
 
 export function useTheme() {
-    const theme: Ref<Theme> = ref<Theme>((localStorage.getItem("user-theme") as Theme) || "auto");
-    
-    const mediaQuery: MediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
+    const theme: Ref<Theme> = ref<Theme>("dark");
+
+    if (localStorage.getItem("user-theme")) theme.value = localStorage.getItem("user-theme") as Theme;
 
     function getSystemTheme(): "dark" | "light" {
         return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -15,21 +15,12 @@ export function useTheme() {
         const root: HTMLElement = document.documentElement;
         const activeTheme: "light" | "dark" = theme.value === "auto" ? getSystemTheme() : theme.value;
 
-        console.log(`Текущая тема: ${theme.value}`);
-
         if (activeTheme === "dark") {
             root.classList.add("dark");
             root.classList.remove("light")
         } else {
             root.classList.add("light");
             root.classList.remove("dark");
-        }
-    };
-
-    // Автоматическая смена темы через браузер
-    function handleSystemThemeChange(): void {
-        if (theme.value === "auto") {
-            updateDOM();
         }
     };
 
@@ -52,17 +43,15 @@ export function useTheme() {
 
     onMounted((): void => {
         updateDOM();
-        mediaQuery.addEventListener("change", handleSystemThemeChange);
-    });
-
-    onUnmounted((): void => {
-        mediaQuery.removeEventListener("change", handleSystemThemeChange);
     });
 
     return {
         theme,
         setTheme,
+        getSystemTheme,
         nextTheme,
         isDark
     };
 }
+
+export { type Theme };
